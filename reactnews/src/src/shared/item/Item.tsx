@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { isPropertySignature } from "typescript";
 
 interface Props {
   title: string
@@ -17,11 +16,22 @@ class Item extends React.Component <Props, State> {
       title: this.props.title,
       done: false
     }
+
+    // Bind function to this class
+    this.clicked = this.clicked.bind(this)
+  }
+
+  clicked() {
+    this.setState({
+      done: !this.state.done
+    })
   }
 
   render() {
     return (
-      <li>{ this.state.title } - { this.state.done ? 'DONE' : 'PENDING' }</li>
+      <li onClick={this.clicked}>
+        { this.state.title } - { this.state.done ? 'DONE' : 'PENDING' }
+      </li>
     )
   }
 }
