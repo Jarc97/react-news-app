@@ -3,7 +3,7 @@ import React from 'react'
 import Item from '../shared/item/Item'
 
 interface Props {
-  // No props needed
+  title: string
 }
 
 interface State {
@@ -24,7 +24,7 @@ class ToDoListClass extends React.Component <Props, State> {
     console.log('componentDidMount()')
 
     this.setState({
-      items: ['Arroz', 'Frijoles', 'Queso']
+      items: test_data
     })
 
     setTimeout(this.addItem.bind(this), 4000, 'Queso Crema')

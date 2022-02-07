@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Item from '../shared/item/Item'
 
 interface Props {
-  // No props needed
+  title: string
 }
 
-const ToDoListFunction = ({}: Props): JSX.Element => {
+const ToDoListFunction = ({ title }: Props): JSX.Element => {
   const test_data = ['Arroz', 'Frijoles', 'Queso']
   const [items, setItems] = useState<string[]>([])
 
@@ -25,7 +25,7 @@ const ToDoListFunction = ({}: Props): JSX.Element => {
 
   return (
     <>
-      <h4>Functional To Do List</h4>
+      <h4>{ title }</h4>
       <ul>
         { displayItems() }
       </ul>
