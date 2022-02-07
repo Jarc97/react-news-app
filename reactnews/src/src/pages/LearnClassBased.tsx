@@ -7,53 +7,67 @@ interface Props {
 }
 
 interface State {
-  items: Item[]
+  items: string[]
 }
 
-class ToDoList extends React.Component <Props, State> {
+const test_data = ['Arroz', 'Frijoles', 'Queso']
 
+class ToDoListClass extends React.Component <Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { items: [] }
+    this.state = {
+      items: []
+    }
   }
 
   componentDidMount() {
     console.log('componentDidMount()')
 
-    const item1 = new Item({ title: 'Arroz' })
-    const item2 = new Item({ title: 'Frijoles' })
-    const item3 = new Item({ title: 'Queso' })
+    this.setState({
+      items: ['Arroz', 'Frijoles', 'Queso']
+    })
 
-    this.state.items.push(item1)
-    this.state.items.push(item2)
-    this.state.items.push(item3)
+    setTimeout(this.addItem.bind(this), 4000, 'Queso Crema')
+
+    this.state.items.push('Asdf')
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate()')
+    // console.log('componentDidUpdate()')
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount()')
+    // console.log('componentWillUnmount()')
   }
 
   addItem(itemTitle: string): void {
     const items = this.state.items
-    items.push(new Item({ title: itemTitle }))
+    items.push(itemTitle)
     this.setState({ items })
+  }
+
+  displayItems() {
+    return this.state.items.length > 0 ? (
+      this.state.items.map((element) => (
+        <Item title={element} />
+      ))
+    ) : (
+      <h3>No items added yet.</h3>
+    )
   }
 
   render() {
     console.log('render')
 
     return(
-      <ul>
-        <Item title='Arroz'/>
-        <Item title='Frijoles'/>
-        <Item title='Queso'/>
-      </ul>
+      <>
+        <h4>Class Based To Do List</h4>
+        <ul>
+          { this.displayItems() }
+        </ul>
+      </>
     )
   }
 }
 
-export default ToDoList
+export default ToDoListClass
